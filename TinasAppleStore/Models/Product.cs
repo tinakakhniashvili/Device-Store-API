@@ -7,6 +7,6 @@
         public double Price { get; set; }
         public string Description { get; set; }
 
-        public ICollection<Product> Prodcts { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }
