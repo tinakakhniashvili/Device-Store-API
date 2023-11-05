@@ -41,12 +41,7 @@ namespace TinasAppleStore.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("productId1")
-                        .HasColumnType("int");
-
                     b.HasKey("productId");
-
-                    b.HasIndex("productId1");
 
                     b.ToTable("Products");
                 });
@@ -54,13 +49,12 @@ namespace TinasAppleStore.Migrations
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
                     b.HasOne("TinasAppleStore.Models.Product", null)
-                        .WithMany("Prodcts")
-                        .HasForeignKey("productId1");
+                        .WithMany("Products");
                 });
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
-                    b.Navigation("Prodcts");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

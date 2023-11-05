@@ -12,8 +12,8 @@ using TinasAppleStore.Data;
 namespace TinasAppleStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231101165900_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231105162711_Initial migration")]
+    partial class Initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,13 +57,13 @@ namespace TinasAppleStore.Migrations
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
                     b.HasOne("TinasAppleStore.Models.Product", null)
-                        .WithMany("Prodcts")
+                        .WithMany("Products")
                         .HasForeignKey("productId1");
                 });
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
-                    b.Navigation("Prodcts");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
