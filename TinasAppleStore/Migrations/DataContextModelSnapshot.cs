@@ -24,11 +24,11 @@ namespace TinasAppleStore.Migrations
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
-                    b.Property<int>("productId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -41,7 +41,12 @@ namespace TinasAppleStore.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.HasKey("productId");
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Products");
                 });
@@ -49,7 +54,8 @@ namespace TinasAppleStore.Migrations
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
                     b.HasOne("TinasAppleStore.Models.Product", null)
-                        .WithMany("Products");
+                        .WithMany("Products")
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>

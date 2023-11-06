@@ -12,8 +12,8 @@ using TinasAppleStore.Data;
 namespace TinasAppleStore.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231105162711_Initial migration")]
-    partial class Initialmigration
+    [Migration("20231106131602_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace TinasAppleStore.Migrations
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>
                 {
-                    b.Property<int>("productId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -44,12 +44,12 @@ namespace TinasAppleStore.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("productId1")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("productId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("productId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Products");
                 });
@@ -58,7 +58,7 @@ namespace TinasAppleStore.Migrations
                 {
                     b.HasOne("TinasAppleStore.Models.Product", null)
                         .WithMany("Products")
-                        .HasForeignKey("productId1");
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("TinasAppleStore.Models.Product", b =>

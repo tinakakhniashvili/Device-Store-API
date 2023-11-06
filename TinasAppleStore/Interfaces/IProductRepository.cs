@@ -5,7 +5,7 @@ namespace TinasAppleStore.Interfaces
     public interface IProductRepository
     {
         ICollection<Product> GetProducts();
-        Product GetProduct(int id);
+        Product GetProduct(int productId);
         bool ProductExists(int productId);
         bool CreateProduct(Product product);
         bool UpdateProduct(Product product);

@@ -11,7 +11,7 @@ namespace TinasAppleStore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasKey(P => P.productId);
+            modelBuilder.Entity<Product>().HasKey(P => P.Id);
         }
     }
 }

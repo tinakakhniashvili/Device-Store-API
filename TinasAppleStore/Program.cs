@@ -40,10 +40,8 @@ builder.Services.AddDbContext<DataContext>(optionsAction);
 
 var app = builder.Build();
 
-if (args.Length == 1 && args[0].ToLower() == "seeddata")
-{
-    SeedData(app);
-}
+ SeedData(app);
+
 
 void SeedData(IHost app)
 {

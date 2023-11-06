@@ -26,7 +26,7 @@ namespace TinasAppleStore.Repository
 
         public Product GetProduct(int id)
         {
-            return _context.Products.Where(p => p.productId == id).FirstOrDefault();
+            return _context.Products.Where(p => p.Id == id).FirstOrDefault();
         }
 
         public ICollection<Product> GetProducts()
@@ -36,7 +36,7 @@ namespace TinasAppleStore.Repository
 
         public bool ProductExists(int productId)
         {
-            return _context.Products.Any(p => p.productId == productId);
+            return _context.Products.Any(p => p.Id == productId);
         }
 
         public bool Save()
@@ -47,8 +47,17 @@ namespace TinasAppleStore.Repository
 
         public bool UpdateProduct(Product product)
         {
-            _context.Update(product);
-            return Save();
+            var foundProduct = GetProduct(product.Id);
+
+            if (foundProduct != null)
+            {
+                foundProduct.Name = product.Name;
+                foundProduct.Price = product.Price;
+                foundProduct.Description = product.Description;
+
+                return Save();
+            }
+            return false;
         }
     }
 }

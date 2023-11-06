@@ -84,12 +84,9 @@ namespace TinasAppleStore.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateCategory(int  productId, [FromBody] ProductDto updatedProduct)
+        public IActionResult UpdateCategory(int  productId, [FromBody] UpdateProductDto updatedProduct)
         {
             if (updatedProduct == null)
-                return BadRequest(ModelState);
-
-            if (productId != updatedProduct.Id)
                 return BadRequest(ModelState);
 
             if (!_productRepository.ProductExists(productId))
@@ -98,15 +95,20 @@ namespace TinasAppleStore.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var productMap = _mapper.Map<Product>(updatedProduct);
+            var foundProductById = _productRepository.GetProduct(productId);
+            foundProductById.Name = updatedProduct.Name;
+            foundProductById.Price = updatedProduct.Price;
+            foundProductById.Description = updatedProduct.Description;
 
-            if (!_productRepository.UpdateProduct(productMap))
+
+            if (!_productRepository.UpdateProduct(foundProductById))
             {
                 ModelState.AddModelError("", "Something went wrong updating product");
                 return StatusCode(500, ModelState);
             }
 
             return NoContent();
+
         }
 
         [HttpDelete("productId")]
@@ -128,7 +130,7 @@ namespace TinasAppleStore.Controllers
                 ModelState.AddModelError("", "Something went wrong deleting product");
             }
             return NoContent();
-        }
+        } 
 
     }
 }
