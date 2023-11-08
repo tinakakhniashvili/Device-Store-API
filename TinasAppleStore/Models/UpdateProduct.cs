@@ -1,6 +1,6 @@
 ﻿namespace TinasAppleStore.Models
 {
-    public class UpdateCategory
+    public class UpdateProduct
     {
         public string Name { get; set; }
         public double Price { get; set; }
