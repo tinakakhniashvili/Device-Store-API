@@ -27,8 +27,8 @@ namespace DeviceStore.Test.MockData
         public static List<Category> GetSampleCategories() =>
             new List<Category>
             {
-                new Category { Id = 1, Name = "Electronics" },
-                new Category { Id = 2, Name = "Furniture" }
+                new Category { Id = 1, Name = "Electronics", Products = new List<Product>() },
+                new Category { Id = 2, Name = "Furniture", Products = new List<Product>() }
             };
     }
 }

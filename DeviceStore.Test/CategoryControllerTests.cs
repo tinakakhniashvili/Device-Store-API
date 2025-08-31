@@ -1,31 +1,34 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DeviceStore.Controllers;
+using DeviceStore.Dto;
 using DeviceStore.Interfaces;
 using DeviceStore.Models;
-using DeviceStore.Dto;
+using DeviceStore.Test.MockData;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
-using Microsoft.AspNetCore.Mvc;
-using FluentAssertions;
-using DeviceStore.Test.MockData;
 
 namespace DeviceStore.Test
 {
     public class CategoryControllerTests
     {
         private readonly CategoryController _controller;
-        private readonly Mock<ICategoryRepository> _categoryRepositoryMock;
-        private readonly Mock<IMapper> _mapperMock;
+        private readonly Mock<ICategoryRepository> _categoryRepositoryMock = new();
+        private readonly IMapper _mapper;
 
         public CategoryControllerTests()
         {
-            _categoryRepositoryMock = new Mock<ICategoryRepository>();
-            _mapperMock = new Mock<IMapper>();
-            _controller = new CategoryController(_categoryRepositoryMock.Object, _mapperMock.Object);
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Category, CategoryDto>()
+                   .ForMember(d => d.ProductCount, o => o.MapFrom(s => s.Products != null ? s.Products.Count : 0));
+            });
+            _mapper = mapperConfig.CreateMapper();
+            _controller = new CategoryController(_categoryRepositoryMock.Object, _mapper);
         }
 
         [Fact]
@@ -33,14 +36,12 @@ namespace DeviceStore.Test
         {
             var categories = CategoryMockData.GetSampleCategories();
             _categoryRepositoryMock.Setup(repo => repo.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(categories);
-            _mapperMock.Setup(m => m.Map<List<CategoryDto>>(It.IsAny<List<Category>>()))
-                       .Returns(categories.Select(c => new CategoryDto { Id = c.Id, Name = c.Name, ProductCount = 0 }).ToList());
-            
+
             var result = await _controller.GetAll(CancellationToken.None);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<List<CategoryDto>>(okResult.Value);
-            returnValue.Should().HaveCount(2);
+            returnValue.Should().HaveCount(categories.Count);
         }
 
         [Fact]
@@ -48,23 +49,22 @@ namespace DeviceStore.Test
         {
             var category = CategoryMockData.GetSampleCategory();
             _categoryRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>())).ReturnsAsync(category);
-            _mapperMock.Setup(m => m.Map<CategoryDto>(It.IsAny<Category>()))
-                       .Returns(new CategoryDto { Id = 1, Name = "Electronics", ProductCount = 0 });
-            
+
             var result = await _controller.Get(1, CancellationToken.None);
-            
+
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnValue = Assert.IsType<CategoryDto>(okResult.Value);
-            returnValue.Name.Should().Be("Electronics");
+            returnValue.Id.Should().Be(category.Id);
+            returnValue.Name.Should().Be(category.Name);
         }
 
         [Fact]
         public async Task Get_ReturnsNotFound_WhenCategoryDoesNotExist()
         {
             _categoryRepositoryMock.Setup(repo => repo.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>())).ReturnsAsync((Category?)null);
-            
+
             var result = await _controller.Get(1, CancellationToken.None);
-            
+
             Assert.IsType<NotFoundResult>(result);
         }
     }
