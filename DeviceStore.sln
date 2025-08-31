@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceStore.Api", "DeviceStore.Api\DeviceStore.Api.csproj", "{20208233-9820-439F-9497-8F424212EE03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceStore.Test", "DeviceStore.Test\DeviceStore.Test.csproj", "{70BE1444-B8D9-4921-9E73-C4997683F1CD}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -33,5 +35,17 @@ Global
 		{20208233-9820-439F-9497-8F424212EE03}.Release|x64.Build.0 = Release|Any CPU
 		{20208233-9820-439F-9497-8F424212EE03}.Release|x86.ActiveCfg = Release|Any CPU
 		{20208233-9820-439F-9497-8F424212EE03}.Release|x86.Build.0 = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|x64.Build.0 = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Debug|x86.Build.0 = Debug|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|x64.ActiveCfg = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|x64.Build.0 = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|x86.ActiveCfg = Release|Any CPU
+		{70BE1444-B8D9-4921-9E73-C4997683F1CD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

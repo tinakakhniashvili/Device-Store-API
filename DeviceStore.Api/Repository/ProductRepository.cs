@@ -56,8 +56,7 @@ namespace DeviceStore.Repository
                     (p.Description != null && EF.Functions.Like(p.Description, $"%{s}%"))
                 );
             }
-
-            // NEW: category filters
+            
             if (query.CategoryId.HasValue)
                 q = q.Where(p => p.CategoryId == query.CategoryId.Value);
 

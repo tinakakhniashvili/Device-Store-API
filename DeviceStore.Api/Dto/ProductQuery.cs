@@ -10,9 +10,8 @@ namespace DeviceStore.Dto
 
         public string? Search { get; set; }
         public string? Sort { get; set; } = "name";
-
-        // NEW:
+        
         public int? CategoryId { get; set; }
-        public string? Category { get; set; } // by name (case-insensitive)
+        public string? Category { get; set; }
     }
 }

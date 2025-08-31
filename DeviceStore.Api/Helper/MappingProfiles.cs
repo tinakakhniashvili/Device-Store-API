@@ -8,13 +8,11 @@ namespace DeviceStore.Helper
     {
         public MappingProfiles()
         {
-            // Product
             CreateMap<Product, ProductDto>()
                 .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category.Name));
             CreateMap<CreateProductDto, Product>();
             CreateMap<UpdateProductDto, Product>();
-
-            // Category
+            
             CreateMap<Category, CategoryDto>()
                 .ForMember(d => d.ProductCount, o => o.MapFrom(s => s.Products.Count));
             CreateMap<CreateCategoryDto, Category>();
